@@ -7,10 +7,16 @@ bundle:
 include:
   - resources/*.yml
 
+sync:
+  include:
+    - dashboards/**
+    - notebooks/**
+
 artifacts:
   python_artifact:
     type: whl
     build: uv build --wheel
+    path: .
 
 # Variable declarations. These variables are assigned in the dev/prod targets below.
 variables:
