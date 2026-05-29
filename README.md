@@ -1,6 +1,6 @@
 # FinPay LakeHouse
 
-Proyecto de arquitectura Lakehouse orientado al procesamiento, almacenamiento y análisis de datos utilizando un enfoque moderno basado en capas (`Bronze`, `Silver`, `Gold`).
+Proyecto de arquitectura Lakehouse orientado al procesamiento, almacenamiento y análisis de datos utilizando un enfoque moderno basado en capas (`Bronze`, `Silver`, `Gold`) con la plataforma **Databricks**.
 
 ## Descripción
 
@@ -61,6 +61,13 @@ Características:
 * Consumo Power BI.
 
 ---
+# Observabilidad
+
+Tablero de Observabilidad
+
+```bash
+bundle_dev_finpay/dashboards/fintech_finpay.observability.pipeline_event_log.pbix
+```
 
 # Autor
 
