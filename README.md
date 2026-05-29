@@ -28,11 +28,19 @@ Contiene datos de las fuentes originales sin transformaciones.
 Características:
 
 * Se procesa con notebook tradicionales
-* Las fuentes a cargar se declaran en el archivo `ingestion_archetypes.json`
+* Las fuentes a cargar se declaran en el archivo:
+```bash
+bundle_dev_finpay/resources/ingestion_archetypes.json
+```
+
 * Datos históricos completos.
 * Trazabilidad de origen.
 * Validaciones mínimas.
 * Persistencia raw.
+* Para la fuente users, se creo un notebook para recuperar los registros que tienen 9 columnas:
+```bash
+bundle_dev_finpay/src/repo_bad_users.ipynb
+```
 
 ### Silver
 
