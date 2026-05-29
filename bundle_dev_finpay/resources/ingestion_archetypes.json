@@ -1,0 +1,217 @@
+[
+  {
+    "source1_comment": "Fuente CSV de transacciones financieras",
+    "source_name": "transactions",
+    "source_path": "/Volumes/fintech_finpay/default/vol_landing/transactions/",
+    "file_pattern": "transactions_*.csv",
+    "file_format": "csv",
+    "delimiter": ",",
+	"encoding": "UTF-8",
+    "header": true,
+	"multiline": false,
+	"enable_observability": true,
+    "primary_key": ["transaction_id"],
+    "_comment_primary_key": "Primary_key es array para soportar futuras llaves compuestas. Ejemplo: ['transaction_id', 'transaction_date']",
+	"deduplication_mode": "none",
+	"_comment_deduplication_mode": "none -> no quita duplicados | drop_duplicates -> distinct por PK | latest_record -> ultima por timestamp del registro",
+	"write_mode": "append",
+	"_comment_write_mode": "append -> solo para bronze | overwrite -> sobreescribe snapshots | merge- > CDC | scd2 -> historización",
+	"target_catalog": "fintech_finpay",
+	"target_schema": "bronze",
+	"target_table": "transactions",
+    "checkpoint_location": "/Volumes/fintech_finpay/default/vol_metadata/checkpoints/transactions/",
+    "schema_location": "/Volumes/fintech_finpay/default/vol_metadata/schemas/transactions/",
+	"bad_records_path": "/Volumes/fintech_finpay/default/vol_metadata/bad_records/transactions/",
+    "rescued_data_column": "_rescued_data",
+    "schema_version": 1,
+	"schema_evolution_mode": "merge",
+	"_comment_schema_evolution_mode": "merge -> mergeSchema=true | rescue -> rescuedDataColumn | fail -> failOnNewColumns",
+    "load_mode": "available_now",
+	"infer_column_types": false,
+    "_comment_load_mode": "Valores posibles futuros: available_now, streaming, batch",
+    "table_properties": {
+      "delta.autoOptimize.optimizeWrite": "true",
+      "delta.autoOptimize.autoCompact": "true"
+    },
+    "_comment_table_properties": "Se pueden agregar propiedades Delta adicionales según necesidades futuras",
+    "active": true,
+    "schema": [
+      {
+        "column_name": "transaction_id",
+        "data_type": "string"
+      },
+      {
+        "column_name": "user_id",
+        "data_type": "string"
+      },
+      {
+        "column_name": "merchant_id",
+        "data_type": "string"
+      },
+      {
+        "column_name": "channel",
+        "data_type": "string"
+      },
+      {
+        "column_name": "transaction_type",
+        "data_type": "string"
+      },
+      {
+        "column_name": "amount",
+        "data_type": "string"
+      },
+      {
+        "column_name": "currency",
+        "data_type": "string"
+      },
+      {
+        "column_name": "transaction_date",
+        "data_type": "string"
+      },
+      {
+        "column_name": "status",
+        "data_type": "string"
+      },
+      {
+        "column_name": "reference_id",
+        "data_type": "string"
+      }
+    ]
+  },
+
+  {
+    "source2_comment": "Fuente JSON de comercios afiliados",
+    "source_name": "merchants",
+    "source_path": "/Volumes/fintech_finpay/default/vol_landing/merchants/",
+    "file_pattern": "*.json",
+    "file_format": "json",
+    "delimiter": null,
+	"encoding": "UTF-8",
+    "header": null,
+	"multiline": true,
+	"enable_observability": true,
+    "primary_key": ["merchant_id"],
+    "_comment_primary_key": "Soporta futuras llaves compuestas",
+	"deduplication_mode": "none",
+	"_comment_deduplication_mode": "none -> no quita duplicados | drop_duplicates -> distinct por PK | latest_record -> ultima por timestamp del registro",
+	"write_mode": "append",
+	"_comment_write_mode": "append -> solo para bronze | overwrite -> sobreescribe snapshots | merge- > CDC | scd2 -> historización",
+	"target_catalog": "fintech_finpay",
+	"target_schema": "bronze",
+	"target_table": "merchants",
+    "checkpoint_location": "/Volumes/fintech_finpay/default/vol_metadata/checkpoints/merchants/",
+    "schema_location": "/Volumes/fintech_finpay/default/vol_metadata/schemas/merchants/",
+	"bad_records_path": "/Volumes/fintech_finpay/default/vol_metadata/bad_records/merchants/",
+    "rescued_data_column": "_rescued_data",
+    "schema_version": 1,
+	"schema_evolution_mode": "merge",
+	"_comment_schema_evolution_mode": "merge -> mergeSchema=true | rescue -> rescuedDataColumn | fail -> failOnNewColumns",
+    "load_mode": "available_now",
+	"infer_column_types": false,
+    "table_properties": {
+      "delta.autoOptimize.optimizeWrite": "true",
+      "delta.autoOptimize.autoCompact": "true"
+    },
+    "active": true,
+    "schema": [
+      {
+        "column_name": "merchant_id",
+        "data_type": "string"
+      },
+      {
+        "column_name": "merchant_name",
+        "data_type": "string"
+      },
+      {
+        "column_name": "category",
+        "data_type": "string"
+      },
+      {
+        "column_name": "country",
+        "data_type": "string"
+      },
+      {
+        "column_name": "affiliation_date",
+        "data_type": "string"
+      },
+      {
+        "column_name": "status",
+        "data_type": "string"
+      },
+      {
+        "column_name": "risk_level",
+        "data_type": "string"
+      }
+    ]
+  },
+
+  {
+    "source3_comment": "Fuente TXT de usuarios",
+    "source_name": "users",
+    "source_path": "/Volumes/fintech_finpay/default/vol_landing/users/",
+    "file_pattern": "users_*.txt",
+    "file_format": "txt",
+    "delimiter": "|",
+	"encoding": "UTF-8",
+    "header": true,
+	"multiline": false,
+	"enable_observability": true,
+    "primary_key": ["user_id"],
+    "_comment_primary_key": "Primary_key soporta múltiples columnas futuras",
+	"deduplication_mode": "none",
+	"_comment_deduplication_mode": "none -> no quita duplicados | drop_duplicates -> distinct por PK | latest_record -> ultima por timestamp del registro",
+	"write_mode": "append",
+	"_comment_write_mode": "append -> solo para bronze | overwrite -> sobreescribe snapshots | merge- > CDC | scd2 -> historización",
+	"target_catalog": "fintech_finpay",
+	"target_schema": "bronze",
+	"target_table": "users",
+    "checkpoint_location": "/Volumes/fintech_finpay/default/vol_metadata/checkpoints/users/",
+    "schema_location": "/Volumes/fintech_finpay/default/vol_metadata/schemas/users/",
+	"bad_records_path": "/Volumes/fintech_finpay/default/vol_metadata/bad_records/users/",
+    "rescued_data_column": "_rescued_data",
+    "schema_version": 1,
+	"schema_evolution_mode": "merge",
+	"_comment_schema_evolution_mode": "merge -> mergeSchema=true | rescue -> rescuedDataColumn | fail -> failOnNewColumns",
+    "load_mode": "available_now",
+	"infer_column_types": false,
+    "table_properties": {
+      "delta.autoOptimize.optimizeWrite": "true",
+      "delta.autoOptimize.autoCompact": "true"
+    },
+    "active": true,
+    "schema": [
+      {
+        "column_name": "user_id",
+        "data_type": "string"
+      },
+      {
+        "column_name": "full_name",
+        "data_type": "string"
+      },
+      {
+        "column_name": "document_id",
+        "data_type": "string"
+      },
+      {
+        "column_name": "email",
+        "data_type": "string"
+      },
+      {
+        "column_name": "phone",
+        "data_type": "string"
+      },
+      {
+        "column_name": "country",
+        "data_type": "string"
+      },
+      {
+        "column_name": "segment",
+        "data_type": "string"
+      },
+      {
+        "column_name": "registration_date",
+        "data_type": "string"
+      }
+    ]
+  }
+]

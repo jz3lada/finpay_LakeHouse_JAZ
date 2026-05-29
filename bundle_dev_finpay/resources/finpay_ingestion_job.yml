@@ -1,0 +1,48 @@
+resources:
+  jobs:
+    finpay_ingestion_job:
+      name: finpay_ingestion_job
+      tasks:
+        - task_key: Carga_Bonze
+          notebook_task:
+            notebook_path: /Workspace/Users/jean.zelada06@gmail.com/.bundle/bundle_dev_finpay/dev/files/src/bronze
+            base_parameters:
+              source_name: all
+            source: WORKSPACE
+          max_retries: 1
+          min_retry_interval_millis: 900000
+          retry_on_timeout: true
+          disable_auto_optimization: false
+          email_notifications:
+            on_start:
+              - jean.zelada06@gmail.com
+            on_success:
+              - jean.zelada06@gmail.com
+            on_failure:
+              - jean.zelada06@gmail.com
+          environment_key: Carga_Btonze_environment
+        - task_key: Carga_Silver_Transactions
+          depends_on:
+            - task_key: Carga_Bonze
+          notebook_task:
+            notebook_path: /Workspace/Users/jean.zelada06@gmail.com/.bundle/bundle_dev_finpay/dev/files/src/Silver_transactions
+            source: WORKSPACE
+          email_notifications:
+            on_success:
+              - jean.zelada06@gmail.com
+            on_failure:
+              - jean.zelada06@gmail.com
+          notification_settings:
+            no_alert_for_skipped_runs: true
+            no_alert_for_canceled_runs: true
+      git_source:
+        git_url: https://github.com/jz3lada/finpay_LakeHouse_JAZ
+        git_provider: gitHub
+        git_branch: main
+      queue:
+        enabled: true
+      environments:
+        - environment_key: Carga_Btonze_environment
+          spec:
+            environment_version: "5"
+      performance_target: PERFORMANCE_OPTIMIZED
