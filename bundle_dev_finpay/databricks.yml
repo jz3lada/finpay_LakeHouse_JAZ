@@ -24,7 +24,8 @@ variables:
     description: The catalog to use
   schema:
     description: The schema to use
-
+  landing_volume:
+    default: /Volumes/fintech_finpay/default/vol_landing/
 targets:
   dev:
     # The default target uses 'mode: development' to create a development copy.
@@ -36,7 +37,7 @@ targets:
     workspace:
       host: https://dbc-6edb81cf-9194.cloud.databricks.com
     variables:
-      catalog: finpay_jaz
+      catalog: fintech_finpay
       schema: ${workspace.current_user.short_name}
   prod:
     mode: production
@@ -45,7 +46,7 @@ targets:
       # We explicitly deploy to /Workspace/Users/jean.zelada06@gmail.com to make sure we only have a single copy.
       root_path: /Workspace/Users/jean.zelada06@gmail.com/.bundle/${bundle.name}/${bundle.target}
     variables:
-      catalog: finpay_jaz
+      catalog: fintech_finpay
       schema: prod
     permissions:
       - user_name: jean.zelada06@gmail.com
