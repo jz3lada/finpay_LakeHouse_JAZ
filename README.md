@@ -61,6 +61,13 @@ Características:
 * Consumo Power BI.
 
 ---
+# Observabilidad
+
+Tablero de Observabilidad
+
+```bash
+bundle_dev_finpay/dashboards/fintech_finpay.observability.pipeline_event_log.pbix
+```
 
 # Autor
 
