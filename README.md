@@ -1,6 +1,6 @@
 # FinPay LakeHouse
 
-Proyecto de arquitectura Lakehouse orientado al procesamiento, almacenamiento y análisis de datos utilizando un enfoque moderno basado en capas (`Bronze`, `Silver`, `Gold`).
+Proyecto de arquitectura Lakehouse orientado al procesamiento, almacenamiento y análisis de datos utilizando un enfoque moderno basado en capas (`Bronze`, `Silver`, `Gold`) con la plataforma **Databricks**.
 
 ## Descripción
 
